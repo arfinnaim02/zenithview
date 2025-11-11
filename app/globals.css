@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom global styles */
+html,
+body {
+  @apply bg-base text-white font-sans;
+}
+
+/* Neon button styles */
+.btn-neon {
+  @apply relative inline-flex items-center justify-center px-6 py-3 font-medium text-base transition duration-300;
+  background: linear-gradient(
+    90deg,
+    theme('colors.neon') 0%,
+    theme('colors.electric') 50%,
+    theme('colors.violet') 100%
+  );
+  border-radius: theme('borderRadius.2xl');
+  box-shadow: 0 0 8px theme('colors.neon'), 0 0 16px theme('colors.electric');
+  color: #0b0f14;
+}
+.btn-neon:hover {
+  box-shadow: 0 0 12px theme('colors.neon'), 0 0 24px theme('colors.electric');
+  transform: translateY(-1px);
+}
+
+/* Glass card */
+.glass {
+  @apply backdrop-blur-sm bg-base/50 border border-white/10;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.2);
+}
+
+/* Custom animations */
+@keyframes pulseSlow {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+.animate-pulseSlow { animation: pulseSlow 8s linear infinite; }
+
+@keyframes scrollX {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-scrollX { animation: scrollX 20s linear infinite; }
+
+/* ===== Hero background animations ===== */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Moving multi-stop gradient with neon hues */
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(40vmax 40vmax at 15% 20%, rgba(0,208,255,0.30), transparent 60%),
+    radial-gradient(35vmax 35vmax at 85% 30%, rgba(57,240,255,0.25), transparent 60%),
+    radial-gradient(40vmax 40vmax at 50% 85%, rgba(139,92,246,0.22), transparent 60%),
+    linear-gradient(120deg, #071018, #0b0f14 40%, #0d1320);
+  background-size: 400% 400%;
+  animation: gradientShift 18s ease-in-out infinite;
+  filter: saturate(1.05);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Soft film grain (pure CSS, super light) */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: .07;
+  background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: overlay;
+}
+
+/* --- Services section effects --- */
+@keyframes borderShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.card-border {
+  position: relative;
+  border-radius: 1.25rem; /* ~rounded-2xl */
+}
+.card-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(120deg, #00d0ff, #39f0ff, #8b5cf6, #00d0ff);
+  background-size: 200% 200%;
+  animation: borderShift 8s ease infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  opacity: .2;
+  transition: opacity .25s ease;
+}
+.card-border:hover::before { opacity: .7; }
+
+/* Section spotlight that follows cursor */
+.services-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(18rem 18rem at var(--mx,50%) var(--my,50%),
+              rgba(0,208,255,.16), transparent 60%);
+  transition: background-position .08s linear;
+}
+
+/* floating decor orbs */
+.orb {
+  filter: blur(40px);
+  opacity: .45;
+  pointer-events: none;
+}
+
+/* Neon gradient text helper */
+.text-gradient-neon {
+  background: linear-gradient(90deg, #00d0ff 0%, #39f0ff 50%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulseSlow, .animate-scrollX { animation: none !important; }
+}
+/* === One-line moving marquee === */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-scroll 35s linear infinite;
+  width: max-content;
+  min-width: 200%;
+  display: flex;
+  align-items: center;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  overflow: hidden;
+}
+
+/* Make logos responsive */
+@media (max-width: 768px) {
+  .animate-marquee img {
+    height: 2.5rem;
+  }
+}

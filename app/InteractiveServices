@@ -1,0 +1,87 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import Link from "next/link";
+
+type Service = {
+  title: string;
+  description: string;
+  slug: string;
+  tags: string[];
+};
+
+export default function InteractiveServices({ items }: { items: Service[] }) {
+  // Build category tabs dynamically from all tags
+  const categories = useMemo(() => {
+    const uniq = new Set<string>();
+    items.forEach((s) => s.tags.forEach((t) => uniq.add(t)));
+    return ["All", ...Array.from(uniq)];
+  }, [items]);
+
+  const [active, setActive] = useState<string>("All");
+
+  const filtered =
+    active === "All" ? items : items.filter((s) => s.tags.includes(active));
+
+  return (
+    <section className="py-20">
+      <div className="max-w-6xl mx-auto px-4">
+        <h2 className="font-heading text-3xl md:text-4xl text-neon text-center mb-8">
+          Our Services
+        </h2>
+
+        {/* Tabs */}
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
+          {categories.map((cat) => {
+            const isActive = active === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => setActive(cat)}
+                className={`px-4 py-2 rounded-lg border text-sm transition
+                  ${isActive
+                    ? "border-neon text-neon bg-white/5"
+                    : "border-white/10 text-gray-300 hover:text-white hover:border-white/20"
+                  }`}
+              >
+                {cat}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {filtered.map((s) => (
+            <article
+              key={s.slug}
+              className="relative p-6 rounded-2xl border border-white/10 bg-base/80 card-border
+                         transition-transform duration-200 hover:-translate-y-1"
+            >
+              <h3 className="font-heading text-xl text-neon mb-2">
+                {s.title}
+              </h3>
+              <p className="text-gray-400 text-sm mb-5">{s.description}</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {s.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="text-xs px-2 py-1 rounded-md border border-white/10 text-gray-300"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <Link
+                href={`/services/${s.slug}`}
+                className="text-electric underline hover:text-neon text-sm"
+              >
+                Learn more →
+              </Link>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,0 +1,3 @@
+suparbase link: https://supabase.com/dashboard/project/mdokarsurynsvmstdsyi/editor/17451?schema=public
+
+normally link: http://localhost:3000/admin/leads
