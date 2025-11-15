@@ -1,6 +1,8 @@
-// app/api/admin/leads/[id]/status/route.ts
+// app/api/admin/consultations/route.ts
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+
+export const dynamic = "force-dynamic";
 
 function getAdminClient() {
   const url = process.env.SUPABASE_URL;
@@ -18,34 +20,29 @@ function getAdminClient() {
 }
 
 /**
- * PATCH /api/admin/leads/[id]/status
- * Body: { status: string }
+ * GET /api/admin/consultations
+ * Return all booked calls from the `consultations` table.
  */
-export async function PATCH(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET() {
   const { supabase, error: credError } = getAdminClient() as any;
   if (credError) {
     return NextResponse.json({ error: credError }, { status: 500 });
   }
 
-  const { status } = await req.json();
-
-  const { error } = await supabase
-    .from("leads")
-    .update({
-      status,
-      updated_at: new Date().toISOString(), // this column exists on leads
-    })
-    .eq("id", params.id);
+  const { data, error } = await supabase
+    .from("consultations")
+    .select("*")
+    .order("scheduled_at", { ascending: false });
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return new NextResponse(null, {
-    status: 204,
-    headers: { "cache-control": "no-store" },
-  });
+  return NextResponse.json(
+    { data },
+    {
+      status: 200,
+      headers: { "cache-control": "no-store" },
+    }
+  );
 }

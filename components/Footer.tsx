@@ -3,6 +3,7 @@
 import Link from "next/link";
 // Pull from the single source of truth so slugs always match pages
 import { services } from "@/lib/services";
+import CalendlyPopupButton from "@/components/CalendlyPopupButton";
 
 // Minimal inline SVG icons (no extra deps)
 function IconX(props: React.SVGProps<SVGSVGElement>) {
@@ -65,15 +66,18 @@ export default function Footer() {
 
   return (
     <footer className="mt-24 border-t border-white/10 pt-12 pb-8">
-      <div className="max-w-6xl mx-auto px-4 text-center">
-        <h3 className="font-heading text-2xl mb-4 text-neon">Book a Free Strategy Call</h3>
-        <p className="text-gray-400 mb-6">
-          Let’s discuss how ZenithView can elevate your business through intelligent solutions.
-        </p>
-        <Link href="/contact" className="btn-neon inline-block">
-          Schedule Now
-        </Link>
-      </div>
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <h3 className="font-heading text-2xl mb-4 text-neon">
+            Book a Free Strategy Call
+          </h3>
+          <p className="text-gray-400 mb-6">
+            Let’s discuss how ZenithView can elevate your business through intelligent
+            solutions.
+          </p>
+
+          {/* This now opens the custom popup with embedded Calendly */}
+          <CalendlyPopupButton className="inline-block" />
+        </div>
 
       <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-sm text-gray-500 px-4 max-w-6xl mx-auto">
         {/* Company */}

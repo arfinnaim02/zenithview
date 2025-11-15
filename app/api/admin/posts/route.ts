@@ -1,4 +1,3 @@
-// app/api/admin/leads/route.ts
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
@@ -19,10 +18,7 @@ function getAdminClient() {
   return { supabase } as const;
 }
 
-/**
- * GET /api/admin/leads
- * Fetch all contact leads for the admin panel.
- */
+// GET /api/admin/posts – list posts
 export async function GET() {
   const { supabase, error: credError } = getAdminClient() as any;
   if (credError) {
@@ -30,47 +26,62 @@ export async function GET() {
   }
 
   const { data, error } = await supabase
-    .from("leads")
+    .from("posts")
     .select("*")
-    .order("created_at", { ascending: false });
+    .order("date", { ascending: false });
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return new NextResponse(JSON.stringify({ data }), {
-    headers: {
-      "content-type": "application/json",
-      "cache-control": "no-store",
-    },
-  });
+  return NextResponse.json(
+    { data },
+    { headers: { "cache-control": "no-store" } }
+  );
 }
 
-/**
- * DELETE /api/admin/leads
- * (Optional) bulk delete leads. Body: { ids: string[] }
- */
-export async function DELETE(req: Request) {
+// POST /api/admin/posts – create post
+export async function POST(req: Request) {
   const { supabase, error: credError } = getAdminClient() as any;
   if (credError) {
     return NextResponse.json({ error: credError }, { status: 500 });
   }
 
   const body = await req.json().catch(() => null);
-  const ids = (body?.ids ?? []) as string[];
-
-  if (!Array.isArray(ids) || ids.length === 0) {
-    return NextResponse.json({ error: "No ids supplied" }, { status: 400 });
+  if (!body) {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { error } = await supabase.from("leads").delete().in("id", ids);
+  const { title, slug, date, excerpt, content } = body;
+
+  if (!title || !content || !date) {
+    return NextResponse.json(
+      { error: "title, date and content are required" },
+      { status: 400 }
+    );
+  }
+
+  const finalSlug =
+    (slug || title.toLowerCase().replace(/\s+/g, "-")).trim();
+
+  const { data, error } = await supabase
+    .from("posts")
+    .insert({
+      title,
+      slug: finalSlug,
+      date,
+      excerpt: excerpt ?? "",
+      content,
+    })
+    .select("*")
+    .single();
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return new NextResponse(JSON.stringify({ success: true }), {
-    status: 200,
-    headers: { "cache-control": "no-store" },
-  });
+  return NextResponse.json(
+    { data },
+    { status: 201, headers: { "cache-control": "no-store" } }
+  );
 }

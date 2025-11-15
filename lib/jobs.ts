@@ -1,76 +1,84 @@
+// lib/jobs.ts
 export type Job = {
-  /**
-   * Unique slug used in the URL for this job posting
-   */
   slug: string;
-  /**
-   * Job title as displayed on the careers page
-   */
   title: string;
-  /**
-   * Where the role is located. Could be remote or a city name.
-   */
   location: string;
-  /**
-   * Job type – full‑time, part‑time, contract, etc.
-   */
   type: string;
-  /**
-   * A short description of the role
-   */
   description: string;
-  /**
-   * List of requirements for applicants
-   */
   requirements: string[];
-  /**
-   * Optional detailed overview used on the job detail page
-   */
   details?: string;
 };
 
-/**
- * A simple catalogue of open positions. In a real application these would be
- * persisted in a database, but for this example they live in a plain array.
- */
 export const jobs: Job[] = [
   {
     slug: 'frontend-developer',
-    title: 'Frontend Developer',
+    title: 'Frontend Developer (React/Next.js)',
     location: 'Remote',
-    type: 'Full‑Time',
-    description: 'We’re looking for a React/Next.js engineer with a passion for UI/UX.',
+    type: 'Full-Time',
+    description:
+      'Own delightful, accessible UI in React/Next.js and ship polished product experiences that users love.',
     requirements: [
-      '3+ years experience with React',
-      'Experience with TypeScript',
-      'Knowledge of Tailwind CSS',
+      '3+ years professional experience with React and modern TypeScript',
+      'Hands-on Next.js (App Router), API routes, and data fetching patterns',
+      'Strong CSS fundamentals (Tailwind preferred) and responsive design',
+      'Focus on performance, accessibility (WCAG), and component reusability',
+      'Comfort with Git, code reviews, and basic testing (Jest/React Testing Library)',
     ],
-    details: 'As a frontend developer at ZenithView you will craft beautiful user interfaces, collaborate closely with designers, and help shape the user experience across our products.',
+    details:
+      'As a Frontend Developer at ZenithView, you will build and refine product interfaces used daily by our customers. '
+      + 'You’ll collaborate with design and backend partners to deliver features end-to-end, improve lighthouse scores, and '
+      + 'help grow our shared component library. You’ll have the autonomy to propose UX improvements and the support of a '
+      + 'team that cares deeply about design quality and maintainable code.\n\n'
+      + 'What you’ll do:\n'
+      + '• Build modern, accessible UIs in React/Next.js (App Router)\n'
+      + '• Translate Figma files into production-ready components\n'
+      + '• Optimize performance and establish UI testing where it matters\n'
+      + '• Partner with designers/PMs to scope, plan, and deliver features\n\n'
+      + 'Our interview process is practical and respectful of your time. Submit your resume (and portfolio/GitHub if available). '
+      + 'We review every application and respond to all candidates.',
   },
+
   {
     slug: 'data-scientist',
-    title: 'Data Scientist',
+    title: 'Data Scientist (ML & Analytics)',
     location: 'Dhaka',
     type: 'Contract',
-    description: 'Join our data team to build predictive models and analytics pipelines.',
+    description:
+      'Build production-ready models and analytics that power real business decisions for our clients.',
     requirements: [
-      'Strong Python skills',
-      'Experience with ML frameworks',
-      'Understanding of SQL and data warehousing',
+      'Strong Python (pandas, NumPy, scikit-learn) and SQL skills',
+      'Experience training and evaluating ML models; solid grasp of feature engineering',
+      'Familiarity with one deep-learning framework (PyTorch or TensorFlow)',
+      'Comfort exploring/bias-checking real-world, messy datasets',
+      'Clear communication of insights to technical and non-technical stakeholders',
     ],
-    details: 'You will work with large datasets, develop models and collaborate with engineers to deploy them into production. Experience in AI/ML is a plus.',
+    details:
+      'In this role you’ll take projects from discovery to deployment: clarifying the business question, assembling clean datasets, '
+      + 'selecting/validating models, and presenting insights that lead to action. The ideal candidate is comfortable running experiments, '
+      + 'documenting methods, and collaborating with engineers to ship reliable pipelines.\n\n'
+      + 'Nice to have: experience with cloud notebooks (Colab/SageMaker), dashboards (Streamlit/Plotly), or MLOps basics. '
+      + 'Please include links to any public repos, notebooks, or publications—optional but appreciated.',
   },
+
   {
     slug: 'marketing-specialist',
-    title: 'Marketing Specialist',
+    title: 'Marketing Specialist (Growth & Content)',
     location: 'Remote',
-    type: 'Part‑Time',
-    description: 'Help grow our brand through creative campaigns and content.',
+    type: 'Part-Time',
+    description:
+      'Plan and execute growth campaigns, create clear messaging, and showcase customer wins across channels.',
     requirements: [
-      '2+ years in digital marketing',
-      'Proficiency with social platforms',
-      'Excellent communication skills',
+      '2+ years in digital marketing across content, social, or lifecycle campaigns',
+      'Comfort writing concise, on-brand copy and repurposing assets for multiple channels',
+      'Working knowledge of SEO/SEM fundamentals and analytics dashboards',
+      'Ability to brief designers and measure campaign impact against goals',
+      'Strong communication and project ownership in a remote environment',
     ],
-    details: 'As a marketing specialist you will develop and execute campaigns, collaborate with the design team and analyse campaign performance.',
+    details:
+      'You’ll own day-to-day campaign execution: content calendars, landing pages, email nurture, and social. '
+      + 'You’ll collaborate with design on visuals, gather customer stories for case studies, and report results with clear, actionable insights. '
+      + 'We value thoughtful storytelling, ethical marketing, and measurable impact.\n\n'
+      + 'If you’ve shipped campaigns you’re proud of, include links to samples (site, blog, socials, or portfolio). '
+      + 'Short writing samples are welcome.',
   },
 ];

@@ -1,8 +1,10 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GlobalBackground from "@/components/GlobalBackground";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
@@ -23,15 +25,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Sticky glass navbar on top of the background */}
         <Navbar />
 
-        {/* Page content; keep your spacing the same */}
+        {/* Page content */}
         <main id="content" className="relative pt-16">
-          {/* Optional container similar to the screenshot (keeps your design) */}
-          {/* <div className="max-w-7xl mx-auto px-4 lg:px-6"> */}
           {children}
-          {/* </div> */}
         </main>
 
         <Footer />
+
+        {/* Calendly popup widget script – needed for the Schedule Now popup */}
+        <Script
+          src="https://assets.calendly.com/assets/external/widget.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

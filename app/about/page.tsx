@@ -10,20 +10,20 @@ const companyTimeline = [
 
 const teamMembers = [
   {
-    name: 'Ayaan Chowdhury',
+    name: 'Nazmul Arafin Naim',
     role: 'CEO & Co‑Founder',
     photo: '/team/founder1.png',
     bio: 'Ayaan oversees product strategy and champions AI innovation. With a background in machine learning, he leads the vision and growth of ZenithView.',
   },
   {
-    name: 'Sara Rahman',
+    name: 'Raisul Islam',
     role: 'CTO & Co‑Founder',
     photo: '/team/founder2.png',
     bio: 'Sara heads technology and engineering. She has built scalable platforms and loves bridging design with engineering excellence.',
   },
   {
-    name: 'Jamil Hasan',
-    role: 'COO & Co‑Founder',
+    name: 'Md Fahim',
+    role: 'CMO & Co‑Founder',
     photo: '/team/founder3.png',
     bio: 'Jamil brings operations and marketing expertise, ensuring our solutions deliver real value and resonate with clients.',
   },

@@ -1,4 +1,3 @@
-// app/api/admin/leads/[id]/status/route.ts
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
@@ -17,12 +16,9 @@ function getAdminClient() {
   return { supabase } as const;
 }
 
-/**
- * PATCH /api/admin/leads/[id]/status
- * Body: { status: string }
- */
-export async function PATCH(
-  req: Request,
+// DELETE /api/admin/posts/[id]
+export async function DELETE(
+  _req: Request,
   { params }: { params: { id: string } }
 ) {
   const { supabase, error: credError } = getAdminClient() as any;
@@ -30,22 +26,14 @@ export async function PATCH(
     return NextResponse.json({ error: credError }, { status: 500 });
   }
 
-  const { status } = await req.json();
-
-  const { error } = await supabase
-    .from("leads")
-    .update({
-      status,
-      updated_at: new Date().toISOString(), // this column exists on leads
-    })
-    .eq("id", params.id);
+  const { error } = await supabase.from("posts").delete().eq("id", params.id);
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return new NextResponse(null, {
-    status: 204,
-    headers: { "cache-control": "no-store" },
-  });
+  return NextResponse.json(
+    { success: true },
+    { status: 200, headers: { "cache-control": "no-store" } }
+  );
 }
