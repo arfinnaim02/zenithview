@@ -20,36 +20,39 @@ export default function AdminDashboard() {
   const [appCount, setAppCount] = useState<number | null>(null);
   const [postCount, setPostCount] = useState<number | null>(null);
 
-  useEffect(() => {
-    async function fetchCounts() {
-      try {
-        const [leadsRes, appsRes] = await Promise.all([
-          fetch("/api/admin/leads"),
-          fetch("/api/admin/applications"),
-        ]);
+useEffect(() => {
+  async function fetchCounts() {
+    try {
+      // Fetch contact leads and applications from your API
+      const [leadsRes, appsRes] = await Promise.all([
+        fetch("/api/admin/leads"),
+        fetch("/api/admin/applications"),
+      ]);
 
-        if (leadsRes.ok) {
-          const json = await leadsRes.json();
-          setLeadCount(json.data?.length ?? 0);
-        }
-
-        if (appsRes.ok) {
-          const json = await appsRes.json();
-          setAppCount(json.data?.length ?? 0);
-        }
-
-        // Blog posts are from static lib (or your current setup)
-        const postsModule = await import("@/lib/blog");
-        // If you renamed exports to `seedPosts`, adjust here
-        const posts = postsModule.posts ?? postsModule.seedPosts ?? [];
-        setPostCount(posts.length);
-      } catch {
-        // Silent fail; counts stay null
+      if (leadsRes.ok) {
+        const json = await leadsRes.json();
+        setLeadCount(json.data?.length ?? 0);
       }
-    }
 
-    fetchCounts();
-  }, []);
+      if (appsRes.ok) {
+        const json = await appsRes.json();
+        setAppCount(json.data?.length ?? 0);
+      }
+
+      // Blog posts from static lib/blog.ts
+      const postsModule = await import("@/lib/blog");
+      const posts = postsModule.posts ?? []; // ✅ Option 1 fix
+      setPostCount(posts.length);
+
+    } catch (error) {
+      console.error("Failed to fetch admin counts:", error);
+      // Counts stay null on error
+    }
+  }
+
+  fetchCounts();
+}, []);
+
 
   const cards: Card[] = [
     {
