@@ -77,7 +77,7 @@ export const services: Service[] = [
       },
     ],
     tags: ["Data", "Scraping"],
-    demoUrl: "https://demo.zenithview.com/data-scraping",
+    demoUrl: "#",
   },
 
   {
@@ -102,7 +102,7 @@ export const services: Service[] = [
       },
     ],
     tags: ["Analytics", "Dashboards"],
-    demoUrl: "https://demo.zenithview.com/data-analytics-visualization",
+    demoUrl: "#",
   },
 
   {
@@ -126,7 +126,7 @@ export const services: Service[] = [
       },
     ],
     tags: ["Web", "Frontend"],
-    demoUrl: "https://demo.zenithview.com/web-development",
+    demoUrl: "#",
   },
 
   {
@@ -150,7 +150,7 @@ export const services: Service[] = [
       },
     ],
     tags: ["Design"],
-    demoUrl: "https://demo.zenithview.com/graphics-design",
+    demoUrl: "#",
   },
 
   {
@@ -174,7 +174,7 @@ export const services: Service[] = [
       },
     ],
     tags: ["Video"],
-    demoUrl: "https://demo.zenithview.com/video-post-production",
+    demoUrl: "#",
   },
 
   {
@@ -198,7 +198,7 @@ export const services: Service[] = [
       },
     ],
     tags: ["AI", "Automation"],
-    demoUrl: "https://demo.zenithview.com/ai-automation",
+    demoUrl: "#",
   },
 
 {
@@ -289,7 +289,7 @@ export const services: Service[] = [
 
   tags: ["Watchdog", "Marketing", "Ad Intelligence", "Competitive Research"],
 
-  demoUrl: "https://ad-analyzer-3dwj.onrender.com/"
+  demoUrl: "https://adanalyzer-ivory.vercel.app/"
 },
 
 
@@ -314,7 +314,7 @@ export const services: Service[] = [
       },
     ],
     tags: ["E-Commerce"],
-    demoUrl: "https://demo.zenithview.com/ecommerce-package",
+    demoUrl: "#",
   },
 
   {
@@ -338,7 +338,7 @@ export const services: Service[] = [
       },
     ],
     tags: ["Email", "IT"],
-    demoUrl: "https://demo.zenithview.com/business-email-solutions",
+    demoUrl: "#",
   },
 
   {
@@ -358,6 +358,6 @@ export const services: Service[] = [
       },
     ],
     tags: ["Custom"],
-    demoUrl: "https://demo.zenithview.com/client-criteria",
+    demoUrl: "#",
   },
 ];
