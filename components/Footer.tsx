@@ -126,7 +126,7 @@ export default function Footer() {
                className="p-2 rounded-lg border border-white/10 hover:text-neon hover:border-neon">
               <IconX className="h-4 w-4" />
             </a>
-            <a href="#" target="_blank" rel="noreferrer" aria-label="LinkedIn"
+            <a href="https://www.linkedin.com/company/zenithview-ltd/" target="_blank" rel="noreferrer" aria-label="LinkedIn"
                className="p-2 rounded-lg border border-white/10 hover:text-neon hover:border-neon">
               <IconLinkedIn className="h-4 w-4" />
             </a>
@@ -138,7 +138,7 @@ export default function Footer() {
                className="p-2 rounded-lg border border-white/10 hover:text-neon hover:border-neon">
               <IconInstagram className="h-4 w-4" />
             </a>
-            <a href="#" target="_blank" rel="noreferrer" aria-label="Facebook"
+            <a href="https://www.facebook.com/zenithview" target="_blank" rel="noreferrer" aria-label="Facebook"
                className="p-2 rounded-lg border border-white/10 hover:text-neon hover:border-neon">
               <IconFacebook className="h-4 w-4" />
             </a>
